@@ -1,1 +1,69 @@
+#include <iostream>
+#include <vector>
+
+void printmatriks(const std::vector<std::vector<int>>& matriks) {
+    for (const auto& row : matriks) {
+        for (int element : row) {
+            std::cout << element << " ";
+    }
+    std::cout << std::endl;
+    }
+}
+
+int main() {
+    //Matriks A
+    std::vector<std::vector<int>> A = {{1, 2}, {3, 4}};
+
+    //Matriks B
+    std::vector<std::vector<int>> B = {{1, 2}, {3, 4}};
+
+    //Penjumlahan matriks A dan B
+    std::vector<std::vector<int>> summatriks(2, std::vector<int>(2, 0));
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            summatriks[i][j] = A[i][j] + B[i][j];
+    }
+}
+
+    //Pengurangan matriks A dan B
+    std::vector<std::vector<int>> diffmatriks(2, std::vector<int>(2, 0));
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            diffmatriks[i][j] = A[i][j] - B[i][j];
+    }
+}
+
+    //Perkalian skalar dengan n
+    int n = 2; 
+    std::vector<std::vector<int>> scalarProduct(2, std::vector<int>(2, 0));
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            scalarProduct[i][j] = A[i][j] * n;
+    }
+}
+
+    //Perkalian matriks A dengan matriks B
+    std::vector<std::vector<int>> productmatriks(2, std::vector<int>(2, 0));
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            for (int k = 0; k < 2; ++k) {
+            productmatriks[i][j] += A[i][k] * B[k][j];
+        }
+    }
+}
+
+    std::cout << "Matriks A:\n";
+    printmatriks(A);
+    std::cout << "Matriks B:\n";
+    printmatriks(B);
+    std::cout << "Penjumlahan A + B:\n";
+    printmatriks(summatriks);
+    std::cout << "Pengurangan A - B:\n";
+    printmatriks(diffmatriks);
+    std::cout << "Perkalian skalar A * " << n << ":\n";
+    printmatriks(scalarProduct);
+    std::cout << "Perkalian A * B:\n";
+    printmatriks(productmatriks);
+    return 0;
+}
 
