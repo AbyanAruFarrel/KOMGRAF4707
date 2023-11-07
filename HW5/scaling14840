@@ -1,0 +1,25 @@
+//Misalkan ingin membesarkan 2x lipat pada kedua sumbu
+#include <iostream>
+
+using namespace std;
+// Fungsi untuk melakukan scaling titik
+void scaling_titik(float& x, float& y, float skalaX, float skalaY) {
+    x *= skalaX;
+    y *= skalaY;
+}
+
+int main() {
+    float xA = 0, yA = 4;
+    float xB = 8, yB = 4;
+
+    cout << "Koordinat awal titik A: (" << xA << ", " << yA << ")" << endl;
+    cout << "Koordinat awal titik B: (" << xB << ", " << yB << ")" << endl;
+
+    scaling_titik(xA, yA, 2, 2);
+    scaling_titik(xB, yB, 2, 2);
+
+    cout << "Koordinat titik A setelah scaling: (" << xA << ", " << yA << ")" << endl;
+    cout << "Koordinat titik B setelah scaling: (" << xB << ", " << yB << ")" << endl;
+
+    return 0;
+}
