@@ -1,0 +1,26 @@
+// misalkan ingin menggeser 6 ke kanan dan 6 ke atas
+#include <iostream>
+
+using namespace std;
+
+void translasi_titik(float& x, float& y, float dX, float dY) {
+    x += dX;
+    y += dY;
+}
+
+int main() {
+    float xA = 0, yA = 4;
+    float xB = 8, yB = 4;
+
+
+    cout << "Koordinat awal titik A: (" << xA << ", " << yA << ")\n";
+    cout << "Koordinat awal titik B: (" << xB << ", " << yB << ")\n";
+
+    translasi_titik(xA, yA, 6, 6);
+    translasi_titik(xB, yB, 6, 6);
+
+    cout << "Koordinat titik A setelah translasi: (" << xA << ", " << yA << ")" << endl;
+    cout << "Koordinat titik B setelah translasi: (" << xB << ", " << yB << ")" << endl;
+
+    return 0;
+}
