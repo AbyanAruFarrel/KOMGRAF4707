@@ -1,0 +1,38 @@
+#include <iostream>
+
+using namespace std;
+
+    void scaling_matriks(int matriks[][3], int faktor_skala) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            matriks[i][j] *= faktor_skala;
+            }   
+        }
+    }
+    void tampilkanMatriks(int matriks[][3]) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            cout << matriks[i][j] << " ";
+        }
+        cout << endl;
+        }
+    }
+
+int main() {
+    int matriks[3][3] = {
+        {5, 2, 4},
+        {2, 3, 2},
+        {4, 2, 5}
+    };
+    int faktor_skala = 3;
+
+    cout << "Matriks sebelum scaling: "<< endl;
+    tampilkanMatriks(matriks);
+
+    scaling_matriks(matriks, faktor_skala);
+
+    cout << "Matriks setelah scaling dengan 3: "<< endl;
+    tampilkanMatriks(matriks);
+
+    return 0;
+}
