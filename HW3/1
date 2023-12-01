@@ -1,1 +1,39 @@
+#include <iostream>
+#include <cmath>
 
+using namespace std;
+
+void drawLineDDA(int x1, int y1, int x2, int y2) {
+
+    int dx = x2 - x1;
+    int dy = y2 - y1;
+
+    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+
+    float xIncrement = static_cast<float>(dx) / static_cast<float>(steps);
+    float yIncrement = static_cast<float>(dy) / static_cast<float>(steps);
+
+    float x = x1;
+    float y = y1;
+
+    cout << "Titik-titik pada garis:" << endl;
+    for (int i = 0; i <= steps; i++) {
+        cout << "(" << round(x) << ", " << round(y) << ")" << endl;
+        x += xIncrement;
+        y += yIncrement;
+    }
+}
+
+int main() {
+    int x1, y1, x2, y2;
+
+    cout << "Masukkan koordinat titik awal (x1 y1): ";
+    cin >> x1 >> y1;
+
+    cout << "Masukkan koordinat titik akhir (x2 y2): ";
+    cin >> x2 >> y2;
+
+    drawLineDDA(x1, y1, x2, y2);
+
+    return 0;
+}
