@@ -1,0 +1,48 @@
+#include <iostream>
+
+using namespace std;
+
+// Fungsi untuk menampilkan matriks
+void printMatrix(int matrix[][4], int rows, int cols) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+// Fungsi untuk melakukan scaling pada matriks
+void scaleMatrix(int matrix[][4], int rows, int cols, int sx, int sy) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            matrix[i][j] *= (i == 0) ? sx : (i == 1) ? sy : 1;
+        }
+    }
+}
+
+int main() {
+    // Matriks awal A(1,4)
+    int matrixA[2][4] = {{1, 2, 3, 4},
+                         {5, 6, 7, 8}};
+
+    // Matriks awal B(8,4)
+    int matrixB[2][4] = {{8, 7, 6, 5},
+                         {4, 3, 2, 1}};
+
+    // Scaling matriks A
+    scaleMatrix(matrixA, 2, 4, 2, 3);
+
+    // Scaling matriks B
+    scaleMatrix(matrixB, 2, 4, 0, -1);
+
+    // Menampilkan matriks A setelah scaling
+    cout << "Matrix A setelah scaling:" << endl;
+    printMatrix(matrixA, 2, 4);
+
+    // Menampilkan matriks B setelah scaling
+    cout << "\nMatrix B setelah scaling:" << endl;
+    printMatrix(matrixB, 2, 4);
+
+    return 0;
+}
