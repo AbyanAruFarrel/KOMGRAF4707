@@ -1,0 +1,110 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+// Kode batas untuk titik potong
+const int INSIDE = 0; // 0000
+const int LEFT = 1;   // 0001
+const int RIGHT = 2;  // 0010
+const int BOTTOM = 4; // 0100
+const int TOP = 8;    // 1000
+
+// Window atau area potong
+const int xMin = 50;
+const int xMax = 250;
+const int yMin = 50;
+const int yMax = 150;
+
+// Struktur untuk titik
+struct Point {
+    int x, y;
+};
+
+// Fungsi untuk menghitung kode batas titik
+int computeCode(Point pt) {
+    int code = INSIDE;
+
+    if (pt.x < xMin)
+        code |= LEFT;
+    else if (pt.x > xMax)
+        code |= RIGHT;
+
+    if (pt.y < yMin)
+        code |= BOTTOM;
+    else if (pt.y > yMax)
+        code |= TOP;
+
+    return code;
+}
+
+// Fungsi untuk melakukan clipping
+void cohenSutherland(Point p1, Point p2) {
+    int code1 = computeCode(p1);
+    int code2 = computeCode(p2);
+
+    bool accept = false;
+
+    while (true) {
+        if ((code1 == 0) && (code2 == 0)) {
+            // Kedua titik berada di dalam window
+            accept = true;
+            break;
+        } else if (code1 & code2) {
+            // Kedua titik berada di luar window pada sisi yang sama
+            break;
+        } else {
+            // Potong garis dan perbarui titik yang berada di luar window
+            int codeOut;
+            Point pt;
+
+            if (code1 != 0) {
+                codeOut = code1;
+            } else {
+                codeOut = code2;
+            }
+
+            if (codeOut & TOP) {
+                pt.x = p1.x + (p2.x - p1.x) * (yMax - p1.y) / (p2.y - p1.y);
+                pt.y = yMax;
+            } else if (codeOut & BOTTOM) {
+                pt.x = p1.x + (p2.x - p1.x) * (yMin - p1.y) / (p2.y - p1.y);
+                pt.y = yMin;
+            } else if (codeOut & RIGHT) {
+                pt.y = p1.y + (p2.y - p1.y) * (xMax - p1.x) / (p2.x - p1.x);
+                pt.x = xMax;
+            } else if (codeOut & LEFT) {
+                pt.y = p1.y + (p2.y - p1.y) * (xMin - p1.x) / (p2.x - p1.x);
+                pt.x = xMin;
+            }
+
+            if (codeOut == code1) {
+                p1 = pt;
+                code1 = computeCode(p1);
+            } else {
+                p2 = pt;
+                code2 = computeCode(p2);
+            }
+        }
+    }
+
+    if (accept) {
+        cout << "Garis setelah clipping: (" << p1.x << ", " << p1.y << ") to (" << p2.x << ", " << p2.y << ")" << endl;
+    } else {
+        cout << "Garis berada di luar window dan telah dihapus." << endl;
+    }
+}
+
+int main() {
+    // Definisi dua titik untuk garis
+    Point p1 = {30, 120};
+    Point p2 = {180, 40};
+
+    // Menampilkan garis sebelum clipping
+    cout << "Garis sebelum clipping: (" << p1.x << ", " << p1.y << ") to (" << p2.x << ", " << p2.y << ")" << endl;
+
+    // Melakukan clipping menggunakan algoritma Cohen-Sutherland
+    cohenSutherland(p1, p2);
+
+    return 0;
+}
